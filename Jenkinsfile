@@ -32,13 +32,12 @@ pipeline {
         
         stage('Deploy Application') {
             steps {
-                echo "Removing the old container to free up port 8084..."
-                // The || true prevents the pipeline from failing if the container doesn't exist yet
+                echo "Removing the old container..."
                 bat "docker rm -f ${IMAGE_NAME} || true"
                 
-                echo "Deploying to the monitoring network with Spring Boot 4 Graphite config..."
-                // Update the deployment stage in Jenkinsfile:
-                bat "docker run -d --name ${IMAGE_NAME} --network monitoring -p 8084:8084 -e MANAGEMENT_GRAPHITE_METRICS_EXPORT_HOST=graphite -e MANAGEMENT_GRAPHITE_METRICS_EXPORT_PROTOCOL=UDP -e MANAGEMENT_GRAPHITE_METRICS_EXPORT_PORT=8125 ${IMAGE_NAME}:${IMAGE_TAG}"
-        }
-    }
+                echo "Deploying with forced JVM Graphite configuration..."
+                // We are injecting these as system properties that cannot be ignored
+                bat "docker run -d --name ${IMAGE_NAME} --network monitoring -p 8084:8084 -e JAVA_TOOL_OPTIONS='-Dmanagement.graphite.metrics.export.host=graphite -Dmanagement.graphite.metrics.export.port=2003 -Dmanagement.graphite.metrics.export.protocol=PLAINTEXT' ${IMAGE_NAME}:${IMAGE_TAG}"
+            }
+        }       
 }
