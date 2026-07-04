@@ -1,28 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: event-website-deployment
-  labels:
-    app: event-website
+  name: techsymp-deployment
 spec:
-  replicas: 3 # Ensures High Availability
+  replicas: 1
   selector:
     matchLabels:
-      app: event-website
+      app: techsymp-web
   template:
     metadata:
       labels:
-        app: event-website
+        app: techsymp-web
     spec:
       containers:
-      - name: event-website
-        image: yourdockerhubusername/event-website:latest # Replace with your Docker Hub username
+      - name: techsymp-container
+        # Must match the exact tag you just built!
+        image: college-event-web:v1
+        # CRITICAL for local testing: Tells K8s not to look on Docker Hub for the image
+        imagePullPolicy: IfNotPresent 
         ports:
-        - containerPort: 80
-        resources:
-          requests:
-            memory: "64Mi"
-            cpu: "250m"
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
+        - containerPort: 8084

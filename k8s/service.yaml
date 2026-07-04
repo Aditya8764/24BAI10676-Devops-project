@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: event-website-service
+  name: techsymp-service
 spec:
+  # NodePort makes it easily accessible on your local machine
   type: NodePort
   selector:
-    app: event-website
+    app: techsymp-web
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
-      nodePort: 30080 # Website will be accessible at http://<Node-IP>:30080
+    - port: 80          # The port K8s exposes internally
+      targetPort: 8084  # The port your Spring Boot app is actually running on
+      nodePort: 30084   # The permanent port you will type in your browser
