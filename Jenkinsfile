@@ -1,9 +1,16 @@
 pipeline {
     agent any
-    
+
+    tools {
+        // Using the exact tool names you set up in Jenkins
+        jdk 'JDK25'
+        maven 'Maven-3.9.16'
+    }
+
     environment {
         IMAGE_NAME = 'college-event-web'
-        IMAGE_TAG  = 'v1'
+        // Automatically tags each local image with the Jenkins Build Number
+        IMAGE_TAG = "v${env.BUILD_ID}" 
     }
 
     stages {
@@ -12,30 +19,31 @@ pipeline {
                 checkout scm
             }
         }
-        
-        stage('Compile Java Application') {
+
+        stage('Maven Build') {
             steps {
-                echo "Packaging the Spring Boot application..."
+                echo 'Building the Spring Boot Application...'
                 bat 'mvn clean package -DskipTests'
             }
         }
-        
+
         stage('Build Docker Image') {
             steps {
-                echo "Building the new Docker image..."
-                bat "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
+                echo 'Building Docker Image Locally...'
+                // Builds the image and stores it directly on your machine
+                bat "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} -t ${IMAGE_NAME}:latest ."
             }
         }
-        
-        stage('Deploy Application') {
+
+        stage('Deploy to Kubernetes') {
             steps {
-                echo "Removing the old container..."
-                bat "docker rm -f ${IMAGE_NAME} || true"
+                echo 'Applying Base Configurations...'
+                bat 'kubectl apply -f k8s/deployment.yaml'
+                bat 'kubectl apply -f k8s/service.yaml'
                 
-                echo "Deploying with forced JVM Graphite configuration..."
-                // Using multiple -e flags instead of a single string with spaces/quotes 
-                // to prevent Windows command parsing errors.
-                bat "docker run -d --name ${IMAGE_NAME} --network monitoring -p 8084:8084 -e JAVA_TOOL_OPTIONS=\"-Dmanagement.graphite.metrics.export.host=graphite -Dmanagement.graphite.metrics.export.port=2003 -Dmanagement.graphite.metrics.export.protocol=PLAINTEXT\" ${IMAGE_NAME}:${IMAGE_TAG}"
+                echo 'Updating K8s with the new local version...'
+                // Tells Kubernetes to grab the image we just built locally
+                bat "kubectl set image deployment/techsymp-deployment techsymp-container=${IMAGE_NAME}:${IMAGE_TAG}"
             }
         }
     }
