@@ -1,49 +1,44 @@
 pipeline {
     agent any
-
-    tools {
-        // Using the exact tool names you set up in Jenkins
-        jdk 'JDK25'
-        maven 'Maven-3.9.16'
-    }
-
+    
+    // Define our variables at the top so they are easy to change later
     environment {
         IMAGE_NAME = 'college-event-web'
-        // Automatically tags each local image with the Jenkins Build Number
-        IMAGE_TAG = "v${env.BUILD_ID}" 
+        IMAGE_TAG  = 'v1'
     }
 
     stages {
         stage('Checkout Code') {
             steps {
+                // Pulls the latest code from GitHub using the URL you configured in the Jenkins UI
                 checkout scm
             }
         }
-
-        stage('Maven Build') {
+        
+        stage('Compile Java Application') {
             steps {
-                echo 'Building the Spring Boot Application...'
+                echo "Packaging the Spring Boot application..."
+                // Compiles the new .jar file so Docker doesn't use old cached code
                 bat 'mvn clean package -DskipTests'
             }
         }
-
+        
         stage('Build Docker Image') {
             steps {
-                echo 'Building Docker Image Locally...'
-                // Builds the image and stores it directly on your machine
-                bat "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} -t ${IMAGE_NAME}:latest ."
+                echo "Building the new Docker image..."
+                bat "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
             }
         }
-
-        stage('Deploy to Kubernetes') {
+        
+        stage('Deploy Application') {
             steps {
-                echo 'Applying Base Configurations...'
-                bat 'kubectl apply -f k8s/deployment.yaml'
-                bat 'kubectl apply -f k8s/service.yaml'
+                echo "Removing the old container to free up port 8084..."
+                // The || true prevents the pipeline from failing if the container doesn't exist yet
+                bat "docker rm -f ${IMAGE_NAME} || true"
                 
-                echo 'Updating K8s with the new local version...'
-                // Tells Kubernetes to grab the image we just built locally
-                bat "kubectl set image deployment/techsymp-deployment techsymp-container=${IMAGE_NAME}:${IMAGE_TAG}"
+                echo "Deploying to the monitoring network with Spring Boot 4 Graphite config..."
+                // The crucial deployment command containing our environment variable overrides
+                bat "docker run -d --name ${IMAGE_NAME} --network monitoring -p 8084:8084 -e MANAGEMENT_GRAPHITE_METRICS_EXPORT_PROTOCOL=PLAINTEXT -e MANAGEMENT_GRAPHITE_METRICS_EXPORT_PORT=2003 ${IMAGE_NAME}:${IMAGE_TAG}"
             }
         }
     }
