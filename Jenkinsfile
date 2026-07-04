@@ -37,9 +37,8 @@ pipeline {
                 bat "docker rm -f ${IMAGE_NAME} || true"
                 
                 echo "Deploying to the monitoring network with Spring Boot 4 Graphite config..."
-                // The crucial deployment command containing our environment variable overrides
-                bat "docker run -d --name ${IMAGE_NAME} --network monitoring -p 8084:8084 -e MANAGEMENT_GRAPHITE_METRICS_EXPORT_PROTOCOL=PLAINTEXT -e MANAGEMENT_GRAPHITE_METRICS_EXPORT_PORT=2003 ${IMAGE_NAME}:${IMAGE_TAG}"
-            }
+                // Update the deployment stage in Jenkinsfile:
+                bat "docker run -d --name ${IMAGE_NAME} --network monitoring -p 8084:8084 -e MANAGEMENT_GRAPHITE_METRICS_EXPORT_HOST=graphite -e MANAGEMENT_GRAPHITE_METRICS_EXPORT_PROTOCOL=UDP -e MANAGEMENT_GRAPHITE_METRICS_EXPORT_PORT=8125 ${IMAGE_NAME}:${IMAGE_TAG}"
         }
     }
 }
