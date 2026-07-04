@@ -1,0 +1,31 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "College Event Web Dashboard",
+    "tags": [ "spring-boot" ],
+    "timezone": "browser",
+    "panels": [
+      {
+        "type": "graph",
+        "title": "JVM Heap Memory Used",
+        "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+        "targets": [
+          {
+            "target": "alias(sumSeries(stats.gauges.jvmMemoryUsed.application.college-event-web.area.heap.id.*), 'JVM Heap Memory Used')"
+          }
+        ]
+      },
+      {
+        "type": "graph",
+        "title": "System CPU Usage",
+        "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+        "targets": [
+          {
+            "target": "alias(stats.gauges.systemCpuUsage.application.college-event-web, 'System CPU Usage')"
+          }
+        ]
+      }
+    ]
+  },
+  "overwrite": true
+}

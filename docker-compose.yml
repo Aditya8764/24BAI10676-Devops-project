@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  college-event-web:
+    build: .
+    ports:
+      - "8084:8084"
+    environment:
+      - MANAGEMENT_METRICS_EXPORT_STATSD_HOST=graphite
+      - MANAGEMENT_METRICS_EXPORT_STATSD_PORT=8125
+      - MANAGEMENT_METRICS_EXPORT_STATSD_FLAVOR=etsy
+    networks:
+      - monitoring
+
+networks:
+  monitoring:
+    external: true

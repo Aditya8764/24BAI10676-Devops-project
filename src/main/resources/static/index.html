@@ -3,76 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechSymp 2026 | College Technical Symposium</title>
+    <meta name="description" content="graVITas 2026 - The Annual International Techno-Management Fest of Vellore Institute of Technology (VIT). Join us for a weekend of innovation, workshops, and hackathons.">
+    <title>graVITas 2026 | Vellore Institute of Technology</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>TechSymp 2026</h1>
-            <nav>
-                <ul>
-                    <li><a href="#schedule">Schedule</a></li>
-                    <li><a href="#speakers">Speakers</a></li>
-                    <li><a href="#announcements">Announcements</a></li>
-                    <li><a href="#register" class="btn">Register Now</a></li>
-                </ul>
-            </nav>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-highlight">gra</span>VIT<span class="logo-highlight">as</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#schedule">Schedule</a></li>
+                <li><a href="#speakers">Speakers</a></li>
+                <li><a href="#announcements">Updates</a></li>
+                <li><a href="#register" class="nav-btn">Register Now</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero" id="about">
+        <div class="hero-content">
+            <div class="badge">VIT's Premium Techno-Management Fest</div>
+            <h1 class="hero-title">Experience the Future at <br><span>graVITas 2026</span></h1>
+            <p class="hero-subtitle">Vellore Institute of Technology welcomes you to the largest gathering of innovators, engineers, and visionaries.</p>
+            <div class="hero-actions">
+                <a href="#register" class="btn btn-primary">Join the Symposium</a>
+                <a href="#schedule" class="btn btn-secondary">Explore Events</a>
+            </div>
+        </div>
+        <div class="hero-graphics">
+            <!-- Abstract decorative elements -->
+            <div class="circle-1"></div>
+            <div class="circle-2"></div>
         </div>
     </header>
 
-    <main class="container">
-        <section id="announcements" class="card">
-            <h2>Latest Announcements</h2>
-            <div id="announcement-ticker">Welcome to TechSymp 2026! Registration closes soon.</div>
+    <main class="main-container">
+        <section id="announcements" class="section glass-panel">
+            <div class="section-header">
+                <h2>Latest Announcements</h2>
+                <div class="divider"></div>
+            </div>
+            <div class="announcement-ticker">
+                <div class="ticker-item">
+                    <span class="tag new">NEW</span> Registration for the 24-Hour Hackathon is now open! Early bird discounts end in 48 hours.
+                </div>
+                <div class="ticker-item">
+                    <span class="tag alert">ALERT</span> Keynote address by Dr. Alice Chen moved to the Anna Auditorium.
+                </div>
+            </div>
         </section>
 
-        <section id="schedule" class="card">
-            <h2>Event Schedule</h2>
-            <table>
-                <tr>
-                    <th>Time</th>
-                    <th>Event</th>
-                    <th>Location</th>
-                </tr>
-                <tr>
-                    <td>09:00 AM</td>
-                    <td>Keynote Address</td>
-                    <td>Main Auditorium</td>
-                </tr>
-                <tr>
-                    <td>11:00 AM</td>
-                    <td>AI & Machine Learning Workshop</td>
-                    <td>Lab 1</td>
-                </tr>
-                <tr>
-                    <td>02:00 PM</td>
-                    <td>Hackathon Kickoff</td>
-                    <td>Innovation Center</td>
-                </tr>
-            </table>
+        <section id="schedule" class="section">
+            <div class="section-header">
+                <h2>Event Schedule</h2>
+                <div class="divider"></div>
+                <p>Plan your weekend with our meticulously curated lineup of events.</p>
+            </div>
+            
+            <div class="schedule-grid">
+                <div class="schedule-card">
+                    <div class="time">09:00 AM - 10:30 AM</div>
+                    <h3 class="event-title">Inaugural & Keynote</h3>
+                    <p class="location"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> Anna Auditorium</p>
+                </div>
+                
+                <div class="schedule-card">
+                    <div class="time">11:00 AM - 01:00 PM</div>
+                    <h3 class="event-title">AI & Generative Models Workshop</h3>
+                    <p class="location"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> Silver Jubilee Tower (SJT) - Lab 102</p>
+                </div>
+                
+                <div class="schedule-card">
+                    <div class="time">02:00 PM - 02:00 PM (Next Day)</div>
+                    <h3 class="event-title">graVITas 24-Hr Hackathon</h3>
+                    <p class="location"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> Technology Tower (TT) Gallery</p>
+                </div>
+
+                <div class="schedule-card">
+                    <div class="time">04:00 PM - 06:00 PM</div>
+                    <h3 class="event-title">RoboWars Championship</h3>
+                    <p class="location"><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> Outdoor Stadium</p>
+                </div>
+            </div>
         </section>
 
-        <section id="speakers" class="card">
-            <h2>Guest Speakers</h2>
-            <ul>
-                <li><strong>Dr. Alice Chen</strong> - AI Ethics Researcher</li>
-                <li><strong>Mark Johnson</strong> - Lead Cloud Architect</li>
-            </ul>
+        <section id="speakers" class="section">
+            <div class="section-header center">
+                <h2>Distinguished Speakers</h2>
+                <div class="divider center"></div>
+            </div>
+            
+            <div class="speaker-grid">
+                <div class="speaker-card">
+                    <div class="speaker-avatar"></div>
+                    <h3 class="speaker-name">Dr. Alice Chen</h3>
+                    <p class="speaker-role">AI Ethics Researcher, DeepMind</p>
+                    <p class="speaker-bio">Pioneer in responsible AI deployment and generative model alignment.</p>
+                </div>
+                <div class="speaker-card">
+                    <div class="speaker-avatar"></div>
+                    <h3 class="speaker-name">Mark Johnson</h3>
+                    <p class="speaker-role">Lead Cloud Architect, AWS</p>
+                    <p class="speaker-bio">Expert in scalable microservices, Kubernetes, and serverless architectures.</p>
+                </div>
+                <div class="speaker-card">
+                    <div class="speaker-avatar"></div>
+                    <h3 class="speaker-name">Priya Sharma</h3>
+                    <p class="speaker-role">Director of Engineering, Google</p>
+                    <p class="speaker-bio">Leading the next generation of highly available distributed systems.</p>
+                </div>
+            </div>
         </section>
 
-        <section id="register" class="card">
-            <h2>Registration</h2>
-            <form id="reg-form">
-                <input type="text" id="name" placeholder="Full Name" required>
-                <input type="email" id="email" placeholder="Student Email" required>
-                <button type="submit" class="btn">Submit</button>
-            </form>
+        <section id="register" class="section registration-section">
+            <div class="registration-container">
+                <div class="reg-info">
+                    <h2>Secure Your Spot at graVITas</h2>
+                    <p>Registration grants you access to all keynotes, technical workshops, and the 24-hour hackathon. Meals and accommodation options are available during checkout.</p>
+                    <ul class="perks">
+                        <li><span>✓</span> Exclusive Workshop Access</li>
+                        <li><span>✓</span> Networking with Tech Leaders</li>
+                        <li><span>✓</span> Official graVITas Swag Bag</li>
+                    </ul>
+                </div>
+                <div class="reg-form-wrapper">
+                    <form id="reg-form" class="modern-form">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" placeholder="Enter your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Student / Professional Email</label>
+                            <input type="email" id="email" placeholder="example@vit.edu.in" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ticket">Ticket Type</label>
+                            <select id="ticket" required>
+                                <option value="" disabled selected>Select Ticket</option>
+                                <option value="vit-student">VIT Student (Internal)</option>
+                                <option value="external-student">External Student</option>
+                                <option value="professional">Professional</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary full-width">Complete Registration</button>
+                    </form>
+                </div>
+            </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2026 College Technical Symposium. All rights reserved.</p>
+        <div class="footer-content">
+            <div class="footer-logo">graVITas '26</div>
+            <p>Vellore Institute of Technology, Vellore, Tamil Nadu 632014</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Code of Conduct</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Vellore Institute of Technology. All rights reserved.</p>
+        </div>
     </footer>
 
     <script src="/js/script.js"></script>
